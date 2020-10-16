@@ -11,7 +11,7 @@ let downloadMaterial = (e)=>{
 
 export default (props)=>{
     console.log(props);
-    const { description='', summary='', title='' } = props.Course;
+    const { description='', summary='', title='', download_id='' } = props.Course;
     return(
         <div id="exampleModalCenteredScrollable" className="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
@@ -38,6 +38,14 @@ export default (props)=>{
                     <div className="col-sm-12">
                         <p>
                             {description}
+                        </p>
+                    </div>
+                </div>
+                <div className="row form-group">
+                    <label className="col-sm-3 col-form-label input-label text-uppercase">Download id</label>
+                    <div className="col-sm-12">
+                        <p>
+                            {download_id}
                         </p>
                     </div>
                 </div>

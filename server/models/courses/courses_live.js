@@ -5,8 +5,7 @@ const {DB} = CONFIG;
 const CoursesLive = new mongoose.Schema({
     title : {
         type: String,
-        required: true,
-        lowercase: true
+        required: true
     },
     authors: [
         {
@@ -97,6 +96,9 @@ const CoursesLive = new mongoose.Schema({
     course:{
         type: mongoose.Schema.ObjectId,
         ref: 'courses'
+    },
+    s3Url: {
+        type: String
     },
     created: {
         type: Date,

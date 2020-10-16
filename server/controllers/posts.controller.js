@@ -173,13 +173,30 @@ export default {
             data: slugId
         })
     },
-    
 
+    updateLessonsTitles : async (req, res)=>{
+        console.log(req.body);
+        const { data, page } = req.body;
+
+        let courseUrl = "/"+data.course_url.split("/").pop();
+
+
+        const isAlredyThr = await Courses.findOne({ courseUrl , totalHours: data.total_time })
+
+        console.log(isAlredyThr);
+
+        if(isAlredyThr){
+            return res.send(isAlredyThr)
+        }
+    },
+    
     crawledCourses: async (req, res)=>{
         console.log(req.body);
         const { data, page } = req.body;
 
         const isAlredyThr = await Courses.findOne({ title: data.title, courseCreated: data.course_created, totalHours: data.total_time })
+
+        console.log(isAlredyThr);
 
         if(isAlredyThr){
             return res.send(isAlredyThr)
@@ -197,6 +214,8 @@ export default {
         //   author_original: 'https://cms-assets.tutsplus.com/cdn-cgi/image/width=76,height=76/uploads/users/227/profiles/1328/profileImage/rachel-mccollin-jan2015-tutsplus.jpg',
         //   author_url: 'https://tutsplus.com/authors/rachel-mccollin'
         // }
+
+
         let getAuthor = async (author, author_url, author_thumb, author_original)=>{
             // let authorThumb = (await uploadToS3(author_thumb, null, 'courses/authors/thumb'));
             // let authorOriginal = (await uploadToS3(author_original, null, 'courses/authors/original'));
@@ -348,6 +367,29 @@ export default {
         //     console.log(isExits)
         // }
 
+    },
+    updateOnlyVideos : async (req, res)=>{
+        console.log(req.body);
+        const { course } = req.body;
+
+        const isExits = await Courses.findById(mongoose.Types.ObjectId(req.body.course_id));
+
+        //UPDATE VIDEOS 
+        const videos = new Videos({
+            course_id: mongoose.Types.ObjectId(isExits._id),
+            videos: req.body.lessons
+        }); 
+
+        const videosResult = await videos.save();
+
+        const result = await Courses.findOneAndUpdate({_id: isExits._id},{
+            lessons: videosResult._id
+        },{ new: true });
+
+        return res.send({
+            result
+        });
+        
     },
     // {
     //     course_id: '5f6b60d304e4403ec5ac0fde',

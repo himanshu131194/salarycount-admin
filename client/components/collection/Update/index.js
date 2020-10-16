@@ -13,6 +13,7 @@ class Update extends Component{
         total_reviews: '',
         ratings : '',
         teaser: '',
+        download_url:'',
         preCourse: {}
     }
     modules = {
@@ -57,14 +58,14 @@ class Update extends Component{
                             <div className="row form-group">
                                 <label htmlFor="addressLine1Label" className="col-sm-3 col-form-label input-label">Title</label>
                                 <div className="col-sm-9">
-                                    <input type="text" className="form-control"  placeholder="Course teaser" aria-label="Course teaser" onChange={(e)=>this.setState({title: e.target.value})}/> 
+                                    <input type="text" className="form-control"  placeholder="Course teaser" aria-label="Course title" onChange={(e)=>this.setState({title: e.target.value})}/> 
                                 </div>
                             </div>
 
                             <div className="row form-group">
                                 <label htmlFor="addressLine1Label" className="col-sm-3 col-form-label input-label">Teaser</label>
                                 <div className="col-sm-9">
-                                    <input type="text" className="form-control"  placeholder="Course title" aria-label="Course title" onChange={(e)=>this.setState({teaser: e.target.value})}/> </div>
+                                    <input type="text" className="form-control"  placeholder="Course title" aria-label="Course teaser" onChange={(e)=>this.setState({teaser: e.target.value})}/> </div>
                             </div>
 
                             <div className="row form-group">
@@ -100,6 +101,13 @@ class Update extends Component{
                                 <label htmlFor="addressLine1Label" className="col-sm-3 col-form-label input-label">Total Reviews</label>
                                 <div className="col-sm-9">
                                     <input type="text" className="form-control"  placeholder="Total reviews" aria-label="Total reviews" onChange={(e)=>this.setState({total_reviews: e.target.value})}/> 
+                                </div>
+                            </div>
+
+                            <div className="row form-group">
+                                <label htmlFor="addressLine1Label" className="col-sm-3 col-form-label input-label">Dwonload URL</label>
+                                <div className="col-sm-9">
+                                    <input type="text" className="form-control"  placeholder="Download url" aria-label="Download url" onChange={(e)=>this.setState({download_url: e.target.value})}/> 
                                 </div>
                             </div>
 

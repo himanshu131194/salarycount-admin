@@ -7,6 +7,7 @@ import Caterogies from '../models/courses/categories'
 import subCaterogies from '../models/courses/sub_categories'
 import Videos from '../models/courses/videos'
 import CoursesLive from '../models/courses/courses_live'
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -110,20 +111,27 @@ export default {
         preCourse['rating'] = parseInt(req.body.rating);
         preCourse['keyPoints'] = req.body.key_points.split("#");
         preCourse.summary = req.body.teaser;
-        preCourse['course'] = mongoose.Types.ObjectId(id)
+        preCourse['course'] = mongoose.Types.ObjectId(id);
+        preCourse['s3Url'] = req.body.download_url;
 
-        console.log('resultObj');
-
-        console.log(preCourse);
         
-        return res.send({
-            preCourse
-        })
+        let isExist = await CoursesLive.findOne({ course:  mongoose.Types.ObjectId(id)});
+        //SAVE TO LIVE COURSE
+        if(!isExist){
+            const coursesLive = new CoursesLive(preCourse);
+            const coursesLiveResult = await coursesLive.save();
+            
+            return res.send({
+                data: coursesLiveResult
+            })
+        }
+        return res.send({data: null});
     },
 
     popUpCourseInfo: async (req, res)=>{
         const { id } = req.query;
-        const preCourse = await Courses.findOne({_id: mongoose.Types.ObjectId(id)}).lean();        
+        const preCourse = await Courses.findOne({_id: mongoose.Types.ObjectId(id)}).lean();  
+        preCourse.download_id =  uuidv4();     
         return res.send({
             data: preCourse
         })
