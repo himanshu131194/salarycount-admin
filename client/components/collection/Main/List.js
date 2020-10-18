@@ -16,11 +16,11 @@ class List extends Component{
       }
       slugToLink = async (e)=>{
         e.preventDefault();
-        const {data:{data: authors}} = await axios.get(`${CONFIG.API_URL}/api/get-slug`);
+        const {data:{data: posters}} = await axios.get(`${CONFIG.API_URL}/api/get-slug`);
         const sleep = m => new Promise(r => setTimeout(r, m));
         
-        for(let x of authors){
-            const { poster: { original: { url } }, _id } = x;
+        for(let x of posters){
+            const { poster: { thumb: { url } }, _id } = x;
             console.log(url);
             const openURL = window.open(url+"?id="+_id, "_blank");
             await sleep(5000, 8000);

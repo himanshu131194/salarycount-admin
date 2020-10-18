@@ -127,12 +127,12 @@ export default {
     },
 
     getSlug: async (req, res)=>{
-        let authors = await Authors.aggregate([
-            { $match: { }},
+        let posters = await Courses.aggregate([
+            { $match: { level: 2 }},
         ]);
         res.send({
-            data: authors
-        })
+            data: posters
+        });
         // let ids = ['5f7019656dd75df4e421d09a', '5f7019326dd75df4e421c6bc', '5f7019126dd75df4e421c0f3', '5f7019086dd75df4e421bf4a', '5f7018fd6dd75df4e421bc3e', '5f7018f26dd75df4e421b98f', '5f7018dc6dd75df4e421b54c'];
         // for(let x of ids){
         //     const post = await Authors.findById(mongoose.Types.ObjectId(x));  
@@ -153,19 +153,19 @@ export default {
         console.log(req.body);
 
         const slugId = uuidv4();
-        const post = await Authors.findById(mongoose.Types.ObjectId(req.body.id));
+        const post = await Courses.findById(mongoose.Types.ObjectId(req.body.id));
         let poster = {};
 
-        poster.thumb = post.poster.thumb;
+        poster.original = post.poster.original;
 
-        poster.original = {
-            url: `https://salarycount.s3.ap-south-1.amazonaws.com/courses/authors/original/${slugId}.${req.body.ext}`,
+        poster.thumb = {
+            url: `https://salarycount.s3.ap-south-1.amazonaws.com/courses/posters/thumb/${slugId}.${req.body.ext}`,
             bucket: `salarycount`,
             file: `${slugId}.${req.body.ext}`,
-            path: `courses/authors/original/${slugId}.${req.body.ext}`
+            path: `courses/posters/thumb/${slugId}.${req.body.ext}`
         }
 
-        let updated = await Authors.findOneAndUpdate({ _id: post._id }, { poster }, { new : true });
+        let updated = await Courses.findOneAndUpdate({ _id: post._id }, { poster }, { new : true });
 
         console.log(updated);
 
