@@ -264,7 +264,7 @@ export default {
                     path: ''
                  }
             },
-            level:0,
+            level:2,
             courseCreated: data.course_created,
             totalHours: data.total_time,
             authors: await getAuthor(data.author, data.author_url, data.author_thumb, data.author_original)

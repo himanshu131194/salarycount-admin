@@ -16,16 +16,14 @@ export default (router)=>{
 
     router.get('/list-companies', postsController.listAllCompanies);
 
-    router.post('/crawl-courses', postsController.updateLessonsTitles);
+    // router.post('/crawl-courses', postsController.updateLessonsTitles);
 
-    // router.post('/crawl-courses', postsController.crawledCourses);
+    router.post('/crawl-courses', postsController.crawledCourses);
 
     // updateLessonsTitles
 
-    router.post('/update-courses', postsController.updateOnlyVideos);
-    // router.post('/update-courses', postsController.updateCourses);
-
-    // updateOnlyVideos
+    // router.post('/update-courses', postsController.updateOnlyVideos);
+    router.post('/update-courses', postsController.updateCourses);
 
     router.post('/update-url', postsController.getSlugId);
     
