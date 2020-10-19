@@ -128,7 +128,7 @@ export default {
 
     getSlug: async (req, res)=>{
         let posters = await Courses.aggregate([
-            { $match: { level: 2 }},
+            { $match: { level: 2 }}
         ]);
         res.send({
             data: posters

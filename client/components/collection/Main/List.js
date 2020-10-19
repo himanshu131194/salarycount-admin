@@ -151,3 +151,44 @@ class List extends Component{
 export default connect(state=>state, actions)(List);
 
 
+
+
+
+
+// Product ID	QTY	Country
+// 1	10	US
+// 2	20	US
+// 3	10	UK
+// 4	20	US
+// 5	30	UK
+// 6	30	US
+// 7	30	US
+
+
+// -	list all the products that have same quantity in different countries the output should be like the following table
+
+// Product ID	QTY	Country
+// 1	10	US
+// 3	10	UK
+// 5	30	UK
+// 6	30	US
+// 7	30	US
+
+
+// select * from table inner join 
+
+
+// select * from table where QTY = (select QYT frm table);
+
+// create table products(id int, qty varchar, country varchar);
+
+// insert into products (1,10,'US'), (2,20,'US'), (3,10,'UK'), (4,20,'US'), (5,30,'UK'), (6,30,'US'), (7,30,'US');
+
+// (1,10,'US'), (2,20,'US'), (3,10,'UK'), (4,20,'US'), (5,30,'UK'), (6,30,'US'), (7,30,'US')
+
+// select x,y, (x+y) from calc;
+
+// insert into products values (1,10,'US'), (2,20,'US'), (3,10,'UK'), (4,20,'US'), (5,30,'UK'), (6,30,'US'), (7,30,'US');
+
+
+// select * from products whrere
