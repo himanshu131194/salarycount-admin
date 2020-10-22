@@ -97,7 +97,13 @@ const CoursesLive = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'courses'
     },
+    downloadId: {
+        type: String
+    },
     s3Url: {
+        type: String
+    },
+    previewUrl:{
         type: String
     },
     created: {

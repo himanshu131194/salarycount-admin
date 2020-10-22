@@ -112,8 +112,9 @@ export default {
         preCourse['keyPoints'] = req.body.key_points.split("#");
         preCourse.summary = req.body.teaser;
         preCourse['course'] = mongoose.Types.ObjectId(id);
-        preCourse['s3Url'] = req.body.download_url;
-
+        preCourse['downloadId'] = req.body.download_url.trim();
+        preCourse['previewUrl'] = "https://salarycount.s3.ap-south-1.amazonaws.com/courses/content/introductions/"+req.body.download_url.trim()+".mp4";
+        preCourse['s3Url'] = "https://salarycount.s3.ap-south-1.amazonaws.com/courses/content/"+req.body.download_url.trim()+".zip";;
         
         let isExist = await CoursesLive.findOne({ course:  mongoose.Types.ObjectId(id)});
         //SAVE TO LIVE COURSE
