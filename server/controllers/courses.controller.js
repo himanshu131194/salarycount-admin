@@ -93,6 +93,21 @@ export default {
     },
 
     updateCourses: async (req, res)=>{
+
+        function htmlspecialchars(key_points) {
+            let keypoints = key_points.map((str)=>{
+                if (typeof(str) == "string") {
+                    str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
+                    str = str.replace(/"/g, "&quot;");
+                    str = str.replace(/'/g, "&#039;");
+                    str = str.replace(/</g, "&lt;");
+                    str = str.replace(/>/g, "&gt;");
+                }
+                return str;
+            })
+            return keypoints;
+        }
+
         console.log(req.body)
         const { id } = req.body;
         //FIND COURSE 
@@ -109,7 +124,7 @@ export default {
         preCourse.description = (req.body.description);
         preCourse['totalReviews'] = parseInt(req.body.total_reviews);
         preCourse['rating'] = parseInt(req.body.rating);
-        preCourse['keyPoints'] = req.body.key_points.split("#");
+        preCourse['keyPoints'] = htmlspecialchars(req.body.key_points.split("#"));
         preCourse.summary = req.body.teaser;
         preCourse['course'] = mongoose.Types.ObjectId(id);
         preCourse['downloadId'] = req.body.download_url.trim();
